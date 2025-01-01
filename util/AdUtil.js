@@ -1,4 +1,3 @@
-require('dotenv').config()
 exports.canModifyQueue = (member) => {
   const { channelID } = member.voice;
   const botChannel = member.guild.voice.channelID;
@@ -13,7 +12,7 @@ exports.canModifyQueue = (member) => {
 let config;
 
 try {
-  config = require("../config.js");
+  config = require("../config.json");
 } catch (error) {
   config = null;
 }

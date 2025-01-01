@@ -1,6 +1,3 @@
-echo off
-color 1
-cls
-:a
+echo "Starting"
 node index.js
-goto a
+PAUSE
