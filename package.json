@@ -1,0 +1,28 @@
+{
+  "name": "dj-boy",
+  "version": "0.5.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "Sobhan-SRZA (mr.sinre)",
+  "license": "BSD-3-Clause",
+  "description": "Music player on discord with custom channel feature.",
+  "dependencies": {
+    "@discord-player/extractor": "^4.5.1",
+    "@discordjs/voice": "^0.17.0",
+    "cli-color": "^2.0.4",
+    "discord-player": "^6.7.1",
+    "discord-player-youtubei": "^1.2.6",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "ffmpeg-static": "^5.2.0",
+    "mediaplex": "^0.0.9",
+    "quick.db": "^9.1.7",
+    "write-file-atomic": "^5.0.1",
+    "youtubei.js": "^10.3.0",
+    "yt-stream": "^1.7.3"
+  }
+}
