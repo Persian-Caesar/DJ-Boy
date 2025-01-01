@@ -1,0 +1,24 @@
+const clc = require("cli-color");
+const express = require('express');
+const post = require("../functions/post");
+module.exports = async () => {
+  const app = express();
+  const port = 5000;
+  app.get('/', (req, res) => res.send('Express Server Is Ready!!'));
+  const listener = app.listen(port, () => {
+    post(
+      `24/7 KeepAlive Server is online!` + "\n" +
+      `Your app listening at ${clc.underline.cyanBright("http://localhost:" + listener.address().port || "http://localhost:" + port)}`,
+      "S"
+    )
+  });
+}
+/**
+ * @copyright
+ * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * @copyright
+ * Work for Persian Caesar | https://dsc.gg/persian-caesar
+ * @copyright
+ * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
+ * @copyright
+ */
