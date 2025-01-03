@@ -1,8 +1,7 @@
-const
-    clc = require("cli-color"),
-    post = require("../functions/post"),
-    loadCommand = require("../functions/loadCommand"),
-    firstUpperCase = require("../functions/firstUpperCase");
+const clc = require("cli-color");
+const post = require("../functions/post");
+const loadCommand = require("../functions/loadCommand");
+const firstUpperCase = require("../functions/firstUpperCase");
 
 /**
  * 

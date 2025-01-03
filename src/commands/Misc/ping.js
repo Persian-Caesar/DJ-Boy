@@ -55,7 +55,7 @@ module.exports = {
       .setDescription(`💓: ${Math.round(client.ws.ping)} ms
 ⏱️: ${Date.now() - interaction.createdTimestamp} ms`);
 
-    return await editResponse({ interaction, message, data: { embeds: [embed2] } });
+    return await editResponse(interaction, message, { embeds: [embed2] });
   }
 }
 /**
