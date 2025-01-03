@@ -69,7 +69,7 @@ post(
   "magentaBright",
   "cyanBright"
 );
-post(`Logging into the BOT...`, "S", "yellowBright", "greenBright");
+post("Logging into the BOT...", "S", "yellowBright", "greenBright");
 handle.forEach((file) => {
   require(`./src/handlers/${file}`)(client);
   amount += 1;

@@ -16,7 +16,9 @@ module.exports = async (client) => {
         await player.extractors.register(YoutubeiExtractor, {
             authentication: await generateOauthTokens()
         });
+        post("Load disocrd-player", "S", "yellowBright", "greenBright");
     } catch (e) {
+        post("Faild to load disocrd-player", "S", "yellowBright", "greenBright");
         error(e)
     }
 };

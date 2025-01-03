@@ -6,9 +6,7 @@ const
   } = require("discord.js"),
   post = require("./post"),
   copyright = require("../storage/embed"),
-  config = require("../../config"),
-  selectLanguage = require("./selectLanguage"),
-  defaultLanguage = selectLanguage(config.source.default_language);
+  config = require("../../config");
 
 /**
  *
