@@ -139,18 +139,22 @@ module.exports = async client => {
     // Add Slash Commands Id to Commands
     client.commands.forEach(async (command) => {
       const
-        cmd = client.commands.get(command.data.name),
+        // cmd = client.commands.get(command.data.name),
+        cmd = client.commands.get(command.name),
         slashCommand = (await client.application.commands.fetch({ cache: true }))
-          .find(a => a.name === command.data.name);
+          // .find(a => a.name === command.data.name);
+          .find(a => a.name === command.name);
 
       return await client.commands.set(
-        cmd.data.name,
+        // cmd.data.name,
+        cmd.name,
         {
           ...cmd,
-          data: {
-            id: slashCommand?.id,
-            ...cmd.data
-          }
+          // data: {
+          //   id: slashCommand?.id,
+          //   ...cmd.data
+          // }
+          id: slashCommand?.id
         }
       );
     });
