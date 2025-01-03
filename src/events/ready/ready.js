@@ -25,8 +25,8 @@ module.exports = async client => {
     const
       commands = client.commands
         .filter(a => a.only_slash)
-        .map(a => a.data),
-
+      // .map(a => a.data),
+      ,
       rest = new REST()
         .setToken(client.token),
 
