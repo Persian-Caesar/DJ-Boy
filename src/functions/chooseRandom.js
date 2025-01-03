@@ -1,10 +1,10 @@
 /**
  *
- * @param {string} string
- * @returns {string}
+ * @param {array} array
+ * @returns {any}
  */
-module.exports = function (string) {
-  return `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
+module.exports = function (array) {
+  return array[Math.floor(Math.random() * array.length)]
 }
 /**
  * @copyright

@@ -1,10 +1,20 @@
 /**
  *
  * @param {string} string
- * @returns {string}
+ * @returns {boolean}
  */
 module.exports = function (string) {
-  return `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
+  const regex = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+  const isValidURL = fetch(string)
+    .then(fetched => {
+      fetched.ok
+    });
+
+  if (regex.test(string))
+    if (isValidURL)
+      return true;
+
+  return false;
 }
 /**
  * @copyright

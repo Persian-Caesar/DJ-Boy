@@ -1,10 +1,15 @@
 /**
  *
- * @param {string} string
- * @returns {string}
+ * @param {Array} array
+ * @param {number} chunkSize
+ * @returns {Array<Array>}
  */
-module.exports = function (string) {
-  return `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
+module.exports = function (array, chunkSize) {
+  const result = [];
+  for (let i = 0; i < array.length; i += chunkSize)
+    result.push(array.slice(i, i + chunkSize));
+
+  return result;
 }
 /**
  * @copyright
