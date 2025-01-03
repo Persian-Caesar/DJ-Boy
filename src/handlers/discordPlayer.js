@@ -18,7 +18,7 @@ module.exports = async (client) => {
         });
         post("Load disocrd-player", "S", "yellowBright", "greenBright");
     } catch (e) {
-        post("Faild to load disocrd-player", "S", "yellowBright", "greenBright");
+        post("Faild to load disocrd-player", "E", "red", "redBright");
         error(e)
     }
 };
