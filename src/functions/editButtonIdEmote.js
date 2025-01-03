@@ -1,11 +1,12 @@
-const {
+const
+  {
     ButtonBuilder,
     ActionRowBuilder
-} = require("discord.js");
-const error = require("./error");
+  } = require("discord.js"),
+  error = require("./error");
 
 /**
- * 
+ *
  * @param {string} customId
  * @param {Array<import("discord.js").ActionRow<import("discord.js").ButtonBuilder>>} buttons 
  * @param {string} id 
@@ -13,18 +14,18 @@ const error = require("./error");
  * @returns {import("discord.js").ActionRow<import("discord.js").ButtonBuilder>}
  */
 module.exports = async function (customId, buttons, id, emote) {
-    try {
-        for (const actionRow of buttons) {
-            for (const button of actionRow.components) {
-                if (customId == button.data.custom_id) {
-                    button.setCustomId(id).setEmoji(emote);
-                };
-            };
-        };
-        return buttons;
-    } catch (e) {
-        error(e)
-    }
+  try {
+    for (const actionRow of buttons)
+      for (const button of actionRow.components)
+        if (customId == button.data.custom_id)
+          button
+            .setCustomId(id)
+            .setEmoji(emote);
+
+    return buttons;
+  } catch (e) {
+    error(e)
+  }
 }
 /**
  * @copyright

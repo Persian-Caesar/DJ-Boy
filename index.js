@@ -50,23 +50,10 @@ const
   handle = fs.readdirSync("./src/handlers").filter(file => file.endsWith(".js")),
   config = require("./config.js"),
   client = new Client({
-    intents: Object.values(GatewayIntentBits).filter(a => !isNaN(a)),
+    intents: Object.values(GatewayIntentBits).filter(a => !isNaN(a) && a !== "GuildPresences"),
     partials: Object.values(Partials).filter(a => !isNaN(a))
-  }),
-  { Player } = require("discord-player"),
-  { DefaultExtractors } = require("@discord-player/extractor"),
-  {
-    YoutubeiExtractor,
-    generateOauthTokens
-  } = require("discord-player-youtubei"),
-  player = new Player(client);
-
-(async () => {
-  await player.extractors.loadMulti(DefaultExtractors);
-  await player.extractors.register(YoutubeiExtractor, {
-    authentication: await generateOauthTokens()
   });
-})();
+
 client.prefix = config.discord.prefix;
 client.token = config.discord.token;
 client.commands = new Collection();

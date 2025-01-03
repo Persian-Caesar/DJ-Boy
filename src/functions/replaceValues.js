@@ -1,10 +1,15 @@
 /**
  *
  * @param {string} string
+ * @param {object} object
  * @returns {string}
  */
-module.exports = function (string) {
-  return `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
+module.exports = function (string, object) {
+  Object
+    .keys(object)
+    .forEach(a => string = string.replace(`{${a}}`, object[a]));
+
+  return string;
 }
 /**
  * @copyright

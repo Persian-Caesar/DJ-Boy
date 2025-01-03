@@ -1,22 +1,20 @@
 const error = require("./error");
 
 /**
- * 
- * @param {import("discord.js").CommandInteraction} interaction 
- * @param {import("discord.js").Message} message 
- * @param {import("discord.js").BaseMessageOptions} data 
- * @returns {Promise<import("discord.js").InteractionResponse<boolean>>}
+ *
+ * @param {{interaction: import("discord.js").CommandInteraction, message: import("discord.js").Message, data: import("discord.js").BaseMessageOptions }} param0
+ * @returns {import("discord.js").Message}
  */
-module.exports = async function (interaction, message = null, data) {
-    try {
-        if (interaction.user) {
-            return await interaction.editReply(data);
-        } else {
-            return await message.edit(data);
-        };
-    } catch (e) {
-        error(e)
-    }
+module.exports = async function ({ interaction, message = null, data }) {
+  try {
+    if (interaction.user)
+      return await interaction.editReply(data).catch(e => e);
+
+    else
+      return await message.edit(data).catch(e => e);
+  } catch (e) {
+    error(e);
+  }
 }
 /**
  * @copyright
