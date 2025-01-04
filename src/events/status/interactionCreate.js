@@ -13,7 +13,8 @@ const
  */
 module.exports = async (client, interaction) => {
   try {
-    if (!interaction.isButton()) return;
+    if (!interaction.isButton())
+      return;
 
     if (interaction.customId === "refreshStatus") {
       await interaction.deferUpdate({ fetchReply: true });

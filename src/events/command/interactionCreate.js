@@ -5,6 +5,7 @@ const {
   Collection
 } = require("discord.js");
 const error = require("../../functions/error");
+const database = require("../../functions/database");
 
 /**
  * 
@@ -15,6 +16,7 @@ const error = require("../../functions/error");
 module.exports = async (client, interaction) => {
   try {
     if (interaction.isCommand()) {
+      const db = new database(client.db);
       const command = client.commands.get(interaction.commandName);
       if (command) {
         const args = [];
@@ -28,8 +30,7 @@ module.exports = async (client, interaction) => {
           } else if (option.value) args.push(option.value);
         };
 
-        const fcmd = client.application.commands.cache.find(c => c.name === command.name);
-        const mentionCommand = `</${fcmd.name}${interaction.options.data.some(a => a.type === ApplicationCommandOptionType.Subcommand) ? ` ${interaction.options.data.find(a => a.type === ApplicationCommandOptionType.Subcommand).name}` : ""}:${fcmd.id}>`;
+        const mentionCommand = `</${command.name}${interaction.options.data.some(a => a.type === ApplicationCommandOptionType.Subcommand) ? ` ${interaction.options.data.find(a => a.type === ApplicationCommandOptionType.Subcommand).name}` : ""}:${command.id}>`;
         if (interaction.guild) {
           const bot_perms = [];
           const user_perms = [];
@@ -66,9 +67,11 @@ module.exports = async (client, interaction) => {
           fetchReply: true
         });
         command.run(client, interaction, args);
-      } else {
-        return;
+        await db.add("totalCommandsUsed", 1);
       }
+      else
+        return;
+
     }
   } catch (e) {
     error(e);

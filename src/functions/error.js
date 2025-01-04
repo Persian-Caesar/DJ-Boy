@@ -99,7 +99,9 @@ module.exports = function (error) {
         data.threadId = config.discord.support.webhook.threads.bugs;
 
       return webhook.send(data);
-    } else
+    }
+
+    else
       console.log(error);
 
   } catch (e) {

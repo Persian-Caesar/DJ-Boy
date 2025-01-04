@@ -8,7 +8,7 @@ const clc = require("cli-color");
  * @param {string} color2
  * @returns {void}
  */
-module.exports = function (data, name, color1, color2) {
+module.exports = function post(data, name, color1, color2) {
   try {
     const dataColor = color1 || "yellowBright";
     const textColor = color2 || "greenBright";

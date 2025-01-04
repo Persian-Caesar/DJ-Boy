@@ -1,17 +1,19 @@
-const {
-  EmbedBuilder
-} = require("discord.js");
-const {
-  useQueue,
-  QueueRepeatMode,
-  useHistory
-} = require("discord-player");
-const error = require("../../functions/error");
-const panelEmbed = require("../../functions/panelEmbed");
-const playerDescription = require("../../functions/playerDescription");
-const editButtonIdEmote = require("../../functions/editButtonIdEmote");
-const playerMenuComponents = require("../../functions/playerMenuComponents");
-const playerButtonComponents = require("../../functions/playerButtonComponents");
+const
+  {
+    EmbedBuilder
+  } = require("discord.js"),
+  {
+    useQueue,
+    QueueRepeatMode,
+    useHistory
+  } = require("discord-player"),
+  error = require("../../functions/error"),
+  panelEmbed = require("../../functions/panelEmbed"),
+  playerDescription = require("../../functions/playerDescription"),
+  editButtonIdEmote = require("../../functions/editButtonIdEmote"),
+  playerMenuComponents = require("../../functions/playerMenuComponents"),
+  playerButtonComponents = require("../../functions/playerButtonComponents"),
+  database = require("../../functions/database");
 
 /**
  * 
@@ -21,8 +23,9 @@ const playerButtonComponents = require("../../functions/playerButtonComponents")
  */
 module.exports = async (client, interaction) => {
   try {
-    const db = client.db;
-    if (!interaction.customId.startsWith("music")) return;
+    const db = new database(client.db);
+    if (!interaction.customId || !interaction.customId.startsWith("music"))
+      return;
 
     const [__, id] = interaction.customId.split("-");
 
@@ -173,7 +176,7 @@ module.exports = async (client, interaction) => {
           else if (queue.repeatMode === QueueRepeatMode.TRACK)
             queue.setRepeatMode(QueueRepeatMode.OFF);
 
-          else queue.setRepeatMode(QueueRepeatMode.QUEUE);
+          else queue.setRepeatMode(QueueRepeatMode.AUTOPLAY);
 
           const embed = new EmbedBuilder(interaction.message.embeds[0])
             .setDescription(await playerDescription(queue));

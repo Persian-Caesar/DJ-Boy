@@ -2,7 +2,8 @@ const
     { Player } = require("discord-player"),
     { DefaultExtractors } = require("@discord-player/extractor"),
     { YoutubeiExtractor, generateOauthTokens } = require("discord-player-youtubei"),
-    error = require("../functions/error");
+    error = require("../functions/error"),
+    post = require("../functions/post");
 
 /**
  * 

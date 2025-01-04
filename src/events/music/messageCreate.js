@@ -4,6 +4,7 @@ const {
 const error = require("../../functions/error");
 const { useQueue, useMainPlayer, QueueRepeatMode } = require("discord-player");
 const timeoutDelete = require("../../functions/timeoutDelete");
+const database = require("../../functions/database");
 
 /**
  * 
@@ -16,8 +17,7 @@ module.exports = async (client, message) => {
         // Filter dm channels, webhooks, the bots
         if (message.channel.type === ChannelType.DM || !message || message?.webhookId || message.author?.bot) return;
 
-        const db = client.db;
-        await db.init();
+        const db = new database(client.db);
         const panel = await db.get(`musicPanel.${message.guild.id}`);
         if (panel && message.channel.id === panel.channel) {
             let query = message.content;
@@ -65,7 +65,7 @@ module.exports = async (client, message) => {
                         channel: message.channel,
                         author: message.author
                     },
-                    repeatMode: QueueRepeatMode.AUTOPLAY,
+                    // repeatMode: QueueRepeatMode.AUTOPLAY,
                     noEmitInsert: true,
                     leaveOnStop: false,
                     leaveOnEmpty: true,

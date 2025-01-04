@@ -59,19 +59,21 @@ module.exports = async (client) => {
                         )
                 ];
 
-                if (!status_message && !msg)
+                if (status_message && msg)
+                    return await msg.edit({
+                        embeds: [embed]
+                    });
+
+                else
                     return await channel.send({
                         embeds: [embed],
                         components: row
                     }).then(async (msg) => {
                         await db.set(`${databaseName}`, msg.id)
                     });
-
-                return await msg.edit({
-                    embeds: [embed]
-                });
-            }, 1000 * 60 * 60);
+            }, 1000 * 60 * 60); // Every 1 hours
         };
+
     } catch (e) {
         error(e)
     }

@@ -17,6 +17,9 @@ module.exports = async function (queue) {
         else if (queue.repeatMode === QueueRepeatMode.TRACK)
             loop = "TRACK";
 
+        else if (queue.repeatMode === QueueRepeatMode.AUTOPLAY)
+            loop = "AUTOPLAY";
+
         else
             loop = "OFF";
 

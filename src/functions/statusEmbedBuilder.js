@@ -5,6 +5,7 @@ const
   error = require("./error"),
   os = require("os"),
   data = require("../storage/embed");
+const database = require("./database");
 
 /**
  *
@@ -13,6 +14,7 @@ const
  */
 module.exports = async function (client) {
   try {
+    const db = new database(client.db);
     return new EmbedBuilder()
       .setColor(data.color.theme)
       .setTitle("Bot Status")
@@ -35,7 +37,7 @@ module.exports = async function (client) {
           },
           {
             name: `${data.emotes.default.heartbeat}| Response time:`,
-            value: `**\`${Math.round(client.ws.ping)}\` ms | Total Commands Used: \`${(await client.db.get("totalCommandsUsed")).toLocaleString()}\`**`,
+            value: `**\`${Math.round(client.ws.ping)}\` ms | Total Commands Used: \`${(await db.get("totalCommandsUsed") || 0).toLocaleString()}\`**`,
             inline: false
           },
           {
