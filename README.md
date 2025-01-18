@@ -1,4 +1,26 @@
 # DJ-Boy
+
+<div align="center">
+    <img src="https://badges.aleen42.com/src/node.svg">
+    <img src="https://badges.aleen42.com/src/javascript.svg">
+    <img src="https://img.shields.io/github/v/release/Persian-Caesar/DJ-Boy?label=Version">
+    <div>
+        <img src="https://img.shields.io/github/license/Persian-Caesar/DJ-Boy?label=License">
+        <img src="https://img.shields.io/github/last-commit/Persian-Caesar/DJ-Boy?label=Last Commit">
+        <img src="https://img.shields.io/github/release-date/Persian-Caesar/DJ-Boy?label=Last Release">
+    </div>
+    <img src="https://img.shields.io/github/forks/Persian-Caesar/DJ-Boy?label=Forks">
+    <img src="https://img.shields.io/github/stars/Persian-Caesar/DJ-Boy?label=Stars">
+    <img src="https://img.shields.io/github/watchers/Persian-Caesar/DJ-Boy?label=Watchers">
+    <img src="https://img.shields.io/github/languages/code-size/Persian-Caesar/DJ-Boy?label=Code Size">
+    <img src="https://img.shields.io/github/directory-file-count/Persian-Caesar/DJ-Boy?label=Files">
+    <div>
+        <img style="display:block;margin-left:auto;margin-right:auto;width:30%;" src="https://github-readme-stats.vercel.app/api/pin/?username=Persian-Caesar&repo=DJ-Boy&theme=react">
+    </div>
+</div>
+
+---
+
 Music player on discord with custom channel feature.
 
 ## Contact:
