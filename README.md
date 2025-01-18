@@ -1,6 +1,7 @@
 # DJ-Boy
 
 <div align="center">
+    <img src="https://badges.aleen42.com/src/npm.svg">
     <img src="https://badges.aleen42.com/src/node.svg">
     <img src="https://badges.aleen42.com/src/javascript.svg">
     <img src="https://img.shields.io/github/v/release/Persian-Caesar/DJ-Boy?label=Version">
@@ -19,7 +20,6 @@
     </div>
 </div>
 
----
 
 Music player on discord with custom channel feature.
 
