@@ -2,7 +2,7 @@
  * @license
   BSD 3-Clause License
 
-  Copyright (c) 2024, the respective contributors, as shown by Persian Caesar and Sobhan.SRZA (mr.sinre) file.
+  Copyright (c) 2021-2025, the respective contributors, as shown by Persian Caesar and Sobhan.SRZA (mr.sinre) file.
 
   All rights reserved.
 
@@ -30,7 +30,6 @@
   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  * @returns
  */
 
 // Packages
@@ -59,6 +58,10 @@ client.token = config.discord.token;
 client.commands = new Collection();
 client.cooldowns = new Collection();
 
+
+// Player setup
+client.players = new Collection();
+
 // Load Handlers 
 let amount = 0;
 post(
@@ -85,12 +88,18 @@ if (client.token) {
 } else {
   post("Please Write Your Bot Token Opposite The Token In The config.js File In Your Project!!", "E", "red", "redBright");
 };
+
+if (config.source.anti_crash) {
+  process.on("unhandledRejection", (reason) => error(reason));
+  process.on("rejectionHandled", (promise) => error(promise));
+  process.on("uncaughtException", (e) => error(e));
+  process.on("uncaughtExceptionMonitor", (e) => error(e));
+};
 /**
  * @copyright
- * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
- * @copyright
- * Work for Persian Caesar | https://dsc.gg/persian-caesar
- * @copyright
- * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
- * @copyright
-*/
+ * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * Developed for Persian Caesar | https://github.com/Persian-Caesar | https://dsc.gg/persian-caesar
+ *
+ * If you encounter any issues or need assistance with this code,
+ * please make sure to credit "Persian Caesar" in your documentation or communications.
+ */

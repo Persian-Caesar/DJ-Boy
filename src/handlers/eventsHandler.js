@@ -1,7 +1,6 @@
-const { useMainPlayer } = require("discord-player");
-const fs = require("fs");
-const clc = require("cli-color");
 const post = require("../functions/post");
+const clc = require("cli-color");
+const fs = require("fs");
 
 /**
  * 
@@ -14,12 +13,6 @@ module.exports = async (client) => {
     const events = fs.readdirSync(`${process.cwd()}/src/events/${dirs}`).filter(files => files.endsWith(".js"));
     for (const file of events) {
       const event = require(`${process.cwd()}/src/events/${dirs}/${file}`);
-      if (dirs === "player") {
-        const player = useMainPlayer();
-        player.events.on(file.split(".")[0], event.bind(null, client));
-        continue;
-      };
-
       client.on(file.split(".")[0], event.bind(null, client));
       amount++;
     };
@@ -28,10 +21,9 @@ module.exports = async (client) => {
 }
 /**
  * @copyright
- * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
- * @copyright
- * Work for Persian Caesar | https://dsc.gg/persian-caesar
- * @copyright
- * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
- * @copyright
+ * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * Developed for Persian Caesar | https://github.com/Persian-Caesar | https://dsc.gg/persian-caesar
+ *
+ * If you encounter any issues or need assistance with this code,
+ * please make sure to credit "Persian Caesar" in your documentation or communications.
  */

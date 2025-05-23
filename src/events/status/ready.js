@@ -23,7 +23,8 @@ module.exports = async (client) => {
             db = new database(client.db),
             guild = client.guilds.cache.get(config.discord.support.id),
             channel = client.channels.cache.get(config.discord.support.stats_channel),
-            databaseName = `status.${channel?.guild?.id}`;
+            databaseName = `status.${channel?.guild?.id}`,
+            intervaltime = 1000 * 60 * 60; // Every 1 hours
 
         if (guild && channel) {
             setInterval(async () => {
@@ -59,19 +60,15 @@ module.exports = async (client) => {
                         )
                 ];
 
-                if (status_message && msg)
-                    return await msg.edit({
-                        embeds: [embed]
-                    });
-
-                else
-                    return await channel.send({
+                if (!status_message || !msg) {
+                    const msg = await channel.send({
                         embeds: [embed],
                         components: row
-                    }).then(async (msg) => {
-                        await db.set(`${databaseName}`, msg.id)
-                    });
-            }, 1000 * 60 * 60); // Every 1 hours
+                    })
+                    await db.set(`${databaseName}`, msg.id);
+                    return;
+                }
+            }, intervaltime);
         };
 
     } catch (e) {
@@ -80,10 +77,9 @@ module.exports = async (client) => {
 }
 /**
  * @copyright
- * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
- * @copyright
- * Work for Persian Caesar | https://dsc.gg/persian-caesar
- * @copyright
- * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
- * @copyright
+ * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * Developed for Persian Caesar | https://github.com/Persian-Caesar | https://dsc.gg/persian-caesar
+ *
+ * If you encounter any issues or need assistance with this code,
+ * please make sure to credit "Persian Caesar" in your documentation or communications.
  */

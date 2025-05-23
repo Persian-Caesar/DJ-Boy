@@ -2,7 +2,8 @@ const {
   EmbedBuilder,
   PermissionsBitField,
   ApplicationCommandOptionType,
-  Collection
+  Collection,
+  MessageFlags
 } = require("discord.js");
 const error = require("../../functions/error");
 const database = require("../../functions/database");
@@ -63,8 +64,8 @@ module.exports = async (client, interaction) => {
 
         // Command Handler 
         await interaction.deferReply({
-          ephemeral: interaction.options.getString("ephemeral") === "true" ? true : false,
-          fetchReply: true
+          flags: interaction.options.getString("ephemeral") === "true" ? MessageFlags.Ephemeral : undefined,
+          withResponse: true
         });
         command.run(client, interaction, args);
         await db.add("totalCommandsUsed", 1);
@@ -79,10 +80,9 @@ module.exports = async (client, interaction) => {
 }
 /**
  * @copyright
- * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
- * @copyright
- * Work for Persian Caesar | https://dsc.gg/persian-caesar
- * @copyright
- * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
- * @copyright
+ * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * Developed for Persian Caesar | https://github.com/Persian-Caesar | https://dsc.gg/persian-caesar
+ *
+ * If you encounter any issues or need assistance with this code,
+ * please make sure to credit "Persian Caesar" in your documentation or communications.
  */

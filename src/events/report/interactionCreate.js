@@ -8,7 +8,8 @@ const
     TextInputBuilder,
     ActionRowBuilder,
     WebhookClient,
-    ChannelType
+    ChannelType,
+    MessageFlags
   } = require("discord.js"),
   error = require("../../functions/error"),
   copyRight = require("../../storage/embed"),
@@ -48,7 +49,7 @@ module.exports = async (client, interaction) => {
 
     else if (interaction.isModalSubmit()) {
       if (interaction.customId === "reportModal") {
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const
           webhook = new WebhookClient({ url: config.discord.support.webhook.url }),
           message = interaction.fields.getTextInputValue("reportModalMessage");
@@ -105,8 +106,8 @@ module.exports = async (client, interaction) => {
             avatarURL: interaction.user.displayAvatarURL({ forceStatic: true }),
             threadId: config.discord.support.webhook.threads.report
           });
-        } 
-        
+        }
+
         else {
           const embed = new EmbedBuilder()
             .setColor(copyRight.color.theme)
@@ -139,10 +140,9 @@ module.exports = async (client, interaction) => {
 }
 /**
  * @copyright
- * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
- * @copyright
- * Work for Persian Caesar | https://dsc.gg/persian-caesar
- * @copyright
- * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
- * @copyright
+ * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * Developed for Persian Caesar | https://github.com/Persian-Caesar | https://dsc.gg/persian-caesar
+ *
+ * If you encounter any issues or need assistance with this code,
+ * please make sure to credit "Persian Caesar" in your documentation or communications.
  */

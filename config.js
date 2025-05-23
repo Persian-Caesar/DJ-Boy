@@ -4,11 +4,6 @@ module.exports = {
     anti_crash: process.env.anti_crash === "true" ? true : false || false, // Anticrash on or off
     one_guild: process.env.one_guild === "true" ? true : false || false, // One Guild on or off
     logger: process.env.logger === "true" ? true : false || false, // Webhook logger on or off
-    dashboard: {
-      on: process.env.dashboard === "true" ? true : false || false, // Dashboad on or off
-      port: process.env.dashboard_port || 3000, // Dashboard port server.
-      host: process.env.dashboard_host || "http://localhost:3000" // Dashboard host url.
-    },
     database: {
       type: process.env.database_type || "", // Choose one type for save users and guilds data. Types: "mysql" | "sql" | "mongodb" | "json"
       mongoURL: process.env.database_mongoURL || "", // If you choose "mongodb" type place your mongo url.
@@ -47,15 +42,14 @@ module.exports = {
       },
       owners: JSON.parse(process.env.owners || "[]") || [] // Source owners.
     },
-    discordbotlist: "https://discordbotlist.com/bots/padio" // Addess of bot discordbotlist page.
+    discordbotlist: "https://discordbotlist.com/bots/djboy" // Addess of bot discordbotlist page.
   }
 }
 /**
  * @copyright
- * Coded by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
- * @copyright
- * Work for Persian Caesar | https://dsc.gg/persian-caesar
- * @copyright
- * Please Mention Us "Persian Caesar", When Have Problem With Using This Code!
- * @copyright
+ * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
+ * Developed for Persian Caesar | https://github.com/Persian-Caesar | https://dsc.gg/persian-caesar
+ *
+ * If you encounter any issues or need assistance with this code,
+ * please make sure to credit "Persian Caesar" in your documentation or communications.
  */
