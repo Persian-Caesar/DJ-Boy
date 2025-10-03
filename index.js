@@ -34,28 +34,28 @@
 
 
 // Packages
-const { LavalinkManager } = require("@persian-caesar/discord-player");
-const
-{
-  Client,
-  Collection,
-  GatewayIntentBits,
-  Partials
-} = require("discord.js"),
-clc = require("cli-color"),
-fs = require("fs"),
-package = require("./package.json"),
-error = require("./src/functions/error.js"),
-post = require("./src/functions/post.js"),
-handle = fs.readdirSync("./src/handlers").filter(file => file.endsWith(".js")),
-config = require("./config.js"),
-client = new Client({
-  intents: Object.values(GatewayIntentBits).filter(a => !isNaN(a) && a !== "GuildPresences"),
-  partials: Object.values(Partials).filter(a => !isNaN(a))
-});
 
 // load .env file
 require("dotenv").config();
+const { LavalinkManager } = require("@persian-caesar/discord-player");
+const
+  {
+    Client,
+    Collection,
+    GatewayIntentBits,
+    Partials
+  } = require("discord.js"),
+  clc = require("cli-color"),
+  fs = require("fs"),
+  package = require("./package.json"),
+  error = require("./src/functions/error.js"),
+  post = require("./src/functions/post.js"),
+  handle = fs.readdirSync("./src/handlers").filter(file => file.endsWith(".js")),
+  config = require("./config.js"),
+  client = new Client({
+    intents: Object.values(GatewayIntentBits).filter(a => !isNaN(a) && a !== "GuildPresences"),
+    partials: Object.values(Partials).filter(a => !isNaN(a))
+  });
 
 client.prefix = config.discord.prefix;
 client.token = config.discord.token;
