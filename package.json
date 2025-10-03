@@ -10,7 +10,7 @@
     "start": "node ."
   },
   "dependencies": {
-    "@persian-caesar/discord-player": "^1.0.9",
+    "@persian-caesar/discord-player": "^1.2.0",
     "cli-color": "^2.0.4",
     "discord.js": "^14.19.3",
     "dotenv": "^16.5.0",

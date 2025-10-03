@@ -1,34 +1,21 @@
 const error = require("./error");
-const { QueueRepeatMode } = require("discord-player");
 
 /**
  * 
- * @param {import("discord-player").GuildQueue} queue 
+ * @param {import("@persian-caesar/discord-player").MusicPlayer} player 
  * @returns {string}
  */
-module.exports = async function (queue) {
+module.exports = function (player) {
     try {
-        const volume = queue.node.volume || "";
-        const isShuffle = queue.isShuffling ? "Yes" : "No";
-        let loop = "";
-        if (queue.repeatMode === QueueRepeatMode.QUEUE)
-            loop = "QUEUE";
+        const volume = player.getVolume() || "";
+        const isShuffle = player.isShuffiled() ? "Yes" : "No";
+        const loop = player.isLoopQueue()
+            ? "🔁 Queue Loop"
+            : player.isLoopTrack()
+                ? "🔂 Track Loop"
+                : "🚫 Loop is diactivated";
 
-        else if (queue.repeatMode === QueueRepeatMode.TRACK)
-            loop = "TRACK";
-
-        else if (queue.repeatMode === QueueRepeatMode.AUTOPLAY)
-            loop = "AUTOPLAY";
-
-        else
-            loop = "OFF";
-
-        let bar = "";
-        try {
-            bar = `\n\n${queue.node.createProgressBar()}`;
-        } catch {
-        }
-        return `**Volume: ${volume}%\nShuffle: ${isShuffle}\nRepeat Mode: ${loop}${bar}**`;
+        return `**Volume: ${volume}%\nShuffle: ${isShuffle}\nRepeat Mode: ${loop}**`;
     } catch (e) {
         error(e)
     }

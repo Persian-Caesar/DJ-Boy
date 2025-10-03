@@ -32,26 +32,30 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 // Packages
-require("dotenv").config();
+const { LavalinkManager } = require("@persian-caesar/discord-player");
 const
-  {
-    Client,
-    Collection,
-    GatewayIntentBits,
-    Partials
-  } = require("discord.js"),
-  clc = require("cli-color"),
-  fs = require("fs"),
-  package = require("./package.json"),
-  error = require("./src/functions/error.js"),
-  post = require("./src/functions/post.js"),
-  handle = fs.readdirSync("./src/handlers").filter(file => file.endsWith(".js")),
-  config = require("./config.js"),
-  client = new Client({
-    intents: Object.values(GatewayIntentBits).filter(a => !isNaN(a) && a !== "GuildPresences"),
-    partials: Object.values(Partials).filter(a => !isNaN(a))
-  });
+{
+  Client,
+  Collection,
+  GatewayIntentBits,
+  Partials
+} = require("discord.js"),
+clc = require("cli-color"),
+fs = require("fs"),
+package = require("./package.json"),
+error = require("./src/functions/error.js"),
+post = require("./src/functions/post.js"),
+handle = fs.readdirSync("./src/handlers").filter(file => file.endsWith(".js")),
+config = require("./config.js"),
+client = new Client({
+  intents: Object.values(GatewayIntentBits).filter(a => !isNaN(a) && a !== "GuildPresences"),
+  partials: Object.values(Partials).filter(a => !isNaN(a))
+});
+
+// load .env file
+require("dotenv").config();
 
 client.prefix = config.discord.prefix;
 client.token = config.discord.token;
@@ -61,6 +65,134 @@ client.cooldowns = new Collection();
 
 // Player setup
 client.players = new Collection();
+client.manager = new LavalinkManager(client, {
+  send(id, payload) {
+    const guild = client.guilds.cache.get(id);
+    if (guild) guild.shard.send(payload);
+  },
+  nodes: [
+    {
+      "host": "lava-all.ajieblogs.eu.org",
+      "port": 80,
+      "password": "https://dsc.gg/ajidevserver",
+      "secure": false
+    },
+    {
+      "host": "lava-all.ajieblogs.eu.org",
+      "port": 443,
+      "password": "https://dsc.gg/ajidevserver",
+      "secure": true
+    },
+    {
+      "host": "lava-v4.ajieblogs.eu.org",
+      "port": 443,
+      "password": "https://dsc.gg/ajidevserver",
+      "secure": true
+    },
+    {
+      "host": "lavalinkv4.serenetia.com",
+      "port": 443,
+      "password": "https://dsc.gg/ajidevserver",
+      "secure": true
+    },
+    {
+      "host": "pool-us.alfari.id",
+      "port": 443,
+      "password": "alfari",
+      "secure": true
+    },
+    {
+      "host": "pool-sg.alfari.id",
+      "port": 443,
+      "password": "alfari",
+      "secure": true
+    },
+    {
+      "host": "lavalink_v4.muzykant.xyz",
+      "port": 443,
+      "password": "https://discord.gg/v6sdrD9kPh",
+      "secure": true
+    },
+    {
+      "host": "lavalink_v3.muzykant.xyz",
+      "port": 443,
+      "password": "https://discord.gg/v6sdrD9kPh",
+      "secure": true
+    },
+    {
+      "host": "lavalink-v4.triniumhost.com",
+      "port": 443,
+      "password": "free",
+      "secure": true
+    },
+    {
+      "host": "lavalink-v3.triniumhost.com",
+      "port": 443,
+      "password": "free",
+      "secure": true
+    },
+    {
+      "host": "lavalink.jirayu.net",
+      "port": 443,
+      "password": "youshallnotpass",
+      "secure": true
+    },
+    {
+      "host": "lavalink.jirayu.net",
+      "port": 13592,
+      "password": "youshallnotpass",
+      "secure": false
+    },
+    {
+      "host": "lavahatry4.techbyte.host",
+      "port": 3000,
+      "password": "NAIGLAVA-dash.techbyte.host",
+      "secure": false
+    },
+    {
+      "host": "lava-v4.ajieblogs.eu.org",
+      "port": 80,
+      "password": "https://dsc.gg/ajidevserver",
+      "secure": false
+    },
+    {
+      "host": "lavalinkv4.serenetia.com",
+      "port": 80,
+      "password": "https://dsc.gg/ajidevserver",
+      "secure": false
+    },
+    {
+      "host": "173.249.0.115",
+      "port": 13592,
+      "password": "https://camming.xyz",
+      "secure": false
+    },
+    {
+      "host": "107.150.58.122",
+      "port": 4006,
+      "password": "https://discord.gg/mjS5J2K3ep",
+      "secure": false
+    },
+    {
+      "host": "5.39.63.207",
+      "port": 8893,
+      "password": "https://discord.gg/mjS5J2K3ep",
+      "secure": false
+    },
+    {
+      "host": "181.215.45.8",
+      "port": 2333,
+      "password": "kirito",
+      "secure": false
+    },
+    {
+      "host": "181.215.45.8",
+      "port": 2334,
+      "password": "free",
+      "secure": false
+    }
+  ]
+});
 
 // Load Handlers 
 let amount = 0;

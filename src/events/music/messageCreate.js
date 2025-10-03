@@ -4,13 +4,14 @@ const {
     ComponentType,
     MessageFlags
 } = require("discord.js");
-const timeoutDelete = require("../../functions/timeoutDelete");
-const database = require("../../functions/database");
-const error = require("../../functions/error");
-const { MusicPlayer } = require("@persian-caesar/discord-player");
 const { ActionRowBuilder } = require("discord.js");
 const { ButtonBuilder } = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
+const { MusicPlayer } = require("@persian-caesar/discord-player");
+const playerDescription = require("../../functions/playerDescription");
+const timeoutDelete = require("../../functions/timeoutDelete");
+const database = require("../../functions/database");
+const error = require("../../functions/error");
 
 /**
  * 
@@ -22,7 +23,7 @@ module.exports = async (client, message) => {
     try {
         // Filter dm channels, webhooks, the bots
         if (message.channel.type === ChannelType.DM || !message || message?.webhookId || message.author?.bot) return;
-        
+
         let collector;
         const db = new database(client.db);
         const panel = await db.get(`musicPanel.${message.guild.id}`);
@@ -33,7 +34,14 @@ module.exports = async (client, message) => {
             const msg = await message.reply("🔍 Searching...");
             let player = players.get(message.guild.id);
             if (!player) {
-                player = new MusicPlayer(message.member.voice.channel);
+                player = new MusicPlayer(
+                    message.member.voice.channel,
+                    message.channel,
+                    client.manager,
+                    {
+                        initialVolume: 100
+                    }
+                );
                 players.set(message.guildId, player);
             }
 
@@ -73,7 +81,7 @@ module.exports = async (client, message) => {
                         const embed = new EmbedBuilder()
                             .setTitle(`${metadata.title}`)
                             .setURL(`${metadata.url}`)
-                            .setDescription(await playerDescription(queue))
+                            .setDescription(playerDescription(player))
                             .setFields([
                                 {
                                     name: `Music From:`,
