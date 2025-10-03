@@ -97,7 +97,6 @@ module.exports = async (client, message) => {
 
                         if (metadata.thumbnail) embed.setThumbnail(metadata.thumbnail);
 
-                        await db.init();
                         const panel = await db.get(`musicPanel.${queue.guild.id}`);
                         if (panel && queue.metadata.channel.id === panel.channel) {
                             const message = await queue.metadata.channel.messages.fetch(panel.message);
@@ -273,7 +272,9 @@ module.exports = async (client, message) => {
             await player.play(query);
 
             return;
-        } else return;
+        }
+
+        else return;
     } catch (e) {
         error(e);
     }

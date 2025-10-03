@@ -16,6 +16,7 @@ module.exports = async (client) => {
     const db = new QuickDB({
       driver: new JSONDriver()
     });
+
     await db.init();
     client.db = db;
     post(`Database Is Successfully Activated!!`, "S")
