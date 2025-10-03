@@ -6,7 +6,7 @@ const {
 
 /**
  * 
- * @param {import("discord-player").GuildQueue} queue 
+ * @param {import("@persian-caesar/discord-player").TrackMetadata[]} queue 
  * @returns {Array<import("discord.js").ActionRow<import("discord.js").StringSelectMenuBuilder>>}
  */
 module.exports = function (queue = null) {
@@ -19,16 +19,16 @@ module.exports = function (queue = null) {
             value: "none"
         });
 
-    if (queue && queue.size > 1) {
+    if (queue && queue.length > 0) {
         menu
-            .setPlaceholder(`${queue.size} songs in queue.`)
+            .setPlaceholder(`${queue.length} songs in queue.`)
             .setOptions(
-                queue.tracks.toArray()
+                queue
                     .slice(0, 25)
-                    .map((song, index) =>
+                    .map((track, index) =>
                         new StringSelectMenuOptionBuilder()
                             .setLabel(
-                                `${index + 1}. ${song.cleanTitle.length >= 95 ? `${song.cleanTitle.slice(0, 91)}...` : `${song.cleanTitle}`}`
+                                `${index + 1}. ${track.title.length >= 95 ? `${track.title.slice(0, 91)}...` : `${track.title}`}`
                             )
                             .setValue(index.toString())
                     )

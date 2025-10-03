@@ -8,6 +8,8 @@ const { ActionRowBuilder } = require("discord.js");
 const { ButtonBuilder } = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const { MusicPlayer } = require("@persian-caesar/discord-player");
+const playerButtonComponents = require("../../functions/playerButtonComponents");
+const playerMenuComponents = require("../../functions/playerMenuComponents");
 const playerDescription = require("../../functions/playerDescription");
 const timeoutDelete = require("../../functions/timeoutDelete");
 const database = require("../../functions/database");
@@ -97,14 +99,14 @@ module.exports = async (client, message) => {
 
                         if (metadata.thumbnail) embed.setThumbnail(metadata.thumbnail);
 
-                        const panel = await db.get(`musicPanel.${queue.guild.id}`);
-                        if (panel && queue.metadata.channel.id === panel.channel) {
-                            const message = await queue.metadata.channel.messages.fetch(panel.message);
-                            const components = await playerMenuComponents(queue);
-                            for (const actionRow of await playerButtonComponents()) {
+                        const panel = await db.get(`musicPanel.${message.guild.id}`);
+                        if (panel && message.channel.id === panel.channel) {
+                            const fetchedMsg = await message.channel.messages.fetch(panel.message);
+                            const components = playerMenuComponents(queue);
+                            for (const actionRow of playerButtonComponents()) {
                                 components.push(actionRow)
                             };
-                            const playMessage = await message.edit({
+                            const playMessage = await fetchedMsg.edit({
                                 embeds: [embed],
                                 components: components
                             }).catch(error);
